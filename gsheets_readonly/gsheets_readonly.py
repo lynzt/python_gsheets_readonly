@@ -25,9 +25,12 @@ def get_headers(row):
     return cols
 
 def get_row_data(row, headers):
+    empty_row = True
     data = {}
     i = 0
     for col in row:
         data[headers[i]] = col
         i = i +1
-    return data
+        if empty_row and col != '':
+            empty_row = False
+    return {'data': data, 'empty_row': empty_row}
