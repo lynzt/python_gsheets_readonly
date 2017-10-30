@@ -2,7 +2,7 @@ import requests
 import csv
 import io
 
-def get_gSheet(file_id):
+def get_gSheet(file_id, gid=0):
     headers={}
     headers["User-Agent"]= "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0"
     headers["DNT"]= "1"
@@ -10,8 +10,7 @@ def get_gSheet(file_id):
     headers["Accept-Encoding"] = "deflate"
     headers["Accept-Language"]= "en-US,en;q=0.5"
 
-    url = "https://docs.google.com/spreadsheets/d/{0}/export?format=csv".format(file_id)
-
+    url = "https://docs.google.com/spreadsheets/d/{0}/export?format=csv&gid={1}".format(file_id, gid)
     r = requests.get(url)
 
     sio = io.StringIO( r.text, newline=None)
